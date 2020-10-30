@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Photos</h1>
+
+{% comment %} make api call.. {% endcomment %}
+{% comment %} get some query params {% endcomment %}
+{% comment %} form to get query params, make get request, redirect to same page {% endcomment %}
+
+<h3>Choose photos to add to your album.</h3>
+
+<form action="{% url 'add_photos' album.id %}" method="post">
+  {% csrf_token %}
+  {% for photo in photos %}
+    <div class="card">
+      <div class="card-content">
+        <img src="{{ photo.src.medium }}" alt="{{ photo.photographer }}" />
+        <p>This photo was taken by <a href="{{ photo.photographer_url }}">{{ photo.photographer }}</a> on Pexels.</p>
+      </div>
+    </div>
+  {% endfor %}
+  <input type="submit" class='btn' value='Add Photos'>
+</form>
+<a href="https://www.pexels.com">Photos provided by Pexels</a>
+
+
+
+{% endblock %}
