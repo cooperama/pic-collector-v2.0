@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>{{ album.name }}</h1>
+<p>Created On: {{ album.created }}</p>
+<p>Use: {{ album.use }}</p>
+<p>Description: {{ album.description }}</p>
+
+{% comment %} make api call.. {% endcomment %}
+{% comment %} get some query params {% endcomment %}
+{% comment %} form to get query params, make get request, redirect to same page {% endcomment %}
+
+
+{% comment %} I think this form is actually what I need to wrap around each photo from the returned api call {% endcomment %}
+<div class="card">
+  <div class="card-content">
+    <form action="{% url 'add_photo' album.id %}" method="post">
+      {% csrf_token %}
+      {{ photo_form.as_p }}
+      <input type="submit" class='btn' value='Add Photos'>
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}
